@@ -1,0 +1,373 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b14">
+  <meta name="description" content="STUDYX - Futuristic student productivity dashboard">
+  <title>STUDYX | Student Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <aside class="sidebar" id="sidebar">
+    <a href="#" class="brand">
+      <span class="brand-icon">S</span> STUDYX
+    </a>
+
+    <p class="nav-label">WORKSPACE</p>
+
+    <nav>
+      <a class="nav-link active" href="#overview">Overview</a>
+      <a class="nav-link" href="#tasks">Study Planner</a>
+      <a class="nav-link" href="#assignments">Assignments</a>
+      <a class="nav-link" href="#exams">Exam Countdown</a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="avatar">S</div>
+      <div>
+        <strong>Student</strong>
+        <small>BCA · Semester 5</small>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main" id="overview">
+    <header class="topbar">
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation"></button>
+      <div class="breadcrumb">Workspace / <span>Dashboard</span></div>
+      <button class="date-chip" id="todayBtn">Today</button>
+    </header>
+
+    <!-- Welcome Section -->
+    <section class="welcome">
+      <div class="welcome-text">
+        <p class="eyebrow">YOUR PERSONAL LEARNING SPACE</p>
+        <h1>Level up your <span>learning.</span></h1>
+        <p class="muted" id="welcomeDate">
+          Your next big achievement starts today.
+        </p>
+      </div>
+
+      <!-- Futuristic Study Illustration -->
+      <div class="orb" aria-hidden="true">
+        <div class="orb-glow"></div>
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="orbit orbit-three"></div>
+
+        <div class="study-icon">🎓</div>
+
+        <span class="orb-star star-one">✦</span>
+        <span class="orb-star star-two">✧</span>
+        <span class="orb-star star-three">✦</span>
+        <span class="orb-dot"></span>
+      </div>
+    </section>
+
+    <!-- Statistics -->
+    <section class="stats-grid">
+      <article class="stat-card">
+        <div class="stat-top">Weekly study hours <span></span></div>
+        <h2 id="hoursStat">0 <small>hrs</small></h2>
+        <p class="muted">Time logged this week</p>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-top">Tasks completed <span></span></div>
+        <h2 id="completedStat">0</h2>
+        <p class="muted">Keep up the momentum</p>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-top">Pending tasks <span></span></div>
+        <h2 id="pendingStat">0</h2>
+        <p class="muted">One step at a time</p>
+      </article>
+    </section>
+
+    <!-- Study Planner and Focus Timer -->
+    <section class="content-grid">
+      <article class="panel" id="tasks">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">STAY CONSISTENT</p>
+            <h2>Today's study plan</h2>
+          </div>
+          <span class="pill" id="taskCount">0 tasks</span>
+        </div>
+
+        <form id="taskForm" class="add-form">
+          <input
+            id="taskInput"
+            placeholder="Add a study task..."
+            maxlength="100"
+            required
+          >
+          <button class="primary-btn" type="submit">+ Add</button>
+        </form>
+
+        <div class="task-list" id="taskList"></div>
+
+        <div class="progress-info">
+          <span>Daily progress</span>
+          <span id="progressLabel"></span>
+        </div>
+
+        <div class="progress-track">
+          <div id="progressBar"></div>
+        </div>
+      </article>
+
+      <article class="panel focus-panel">
+        <p class="eyebrow">DEEP WORK MODE</p>
+        <h2>Focus session</h2>
+        <p class="muted">Small steps. Big results.</p>
+
+        <div class="timer" id="timer">25:00</div>
+
+        <div class="timer-controls">
+          <button class="primary-btn" id="startTimer">Start focus</button>
+          <button class="secondary-btn" id="resetTimer">Reset</button>
+        </div>
+
+        <p class="timer-note" id="timerNote">
+          25 minutes of distraction-free learning
+        </p>
+      </article>
+    </section>
+
+    <!-- Assignments and Exam Countdown -->
+    <section class="content-grid lower-grid">
+      <article class="panel" id="assignments">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">DEADLINE TRACKER</p>
+            <h2>Assignments</h2>
+          </div>
+        </div>
+
+        <form id="assignmentForm" class="add-form assignment-form">
+          <input
+            id="assignmentInput"
+            placeholder="Assignment title..."
+            maxlength="100"
+            required
+          >
+
+          <input
+            id="assignmentDate"
+            type="date"
+            aria-label="Assignment deadline"
+            required
+          >
+
+          <button class="primary-btn" type="submit">Add</button>
+        </form>
+
+        <div id="assignmentList" class="task-list"></div>
+      </article>
+
+      <article class="panel" id="exams">
+        <p class="eyebrow">BE READY</p>
+        <h2>Exam countdown</h2>
+        <p class="muted">Set the date of your next exam.</p>
+
+        <label class="field-label" for="examName">Exam name</label>
+        <input
+          class="full-input"
+          id="examName"
+          maxlength="80"
+          placeholder="e.g. BCA Semester 5"
+        >
+
+        <label class="field-label" for="examDate">Exam date</label>
+        <input class="full-input" type="date" id="examDate">
+
+        <div class="countdown-box">
+          <div class="countdown-content">
+            <strong id="countdownNumber">--</strong>
+            <span id="countdownText">Days Remaining</span>
+          </div>
+          <div class="countdown-badge">EXAM</div>
+        </div>
+
+        <button class="primary-btn full-btn" id="saveExam">
+          Save exam date
+        </button>
+      </article>
+    </section>
+
+    <footer>STUDYX <span>✦</span> Built for your next level.</footer>
+  </main>
+
+  <!-- Graduation cap illustration styling -->
+  <style>
+    .welcome {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .welcome-text {
+      min-width: 0;
+    }
+
+    .orb {
+      position: relative;
+      width: 210px;
+      height: 210px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 50%;
+      isolation: isolate;
+      background:
+        radial-gradient(circle at 35% 25%, #263b70 0%, transparent 45%),
+        radial-gradient(circle at center, #111b38 0%, #080b14 72%);
+      border: 1px solid rgba(113, 145, 255, 0.4);
+      box-shadow:
+        0 0 35px rgba(79, 110, 255, 0.18),
+        inset 0 0 35px rgba(77, 111, 255, 0.12);
+    }
+
+    .orb-glow {
+      position: absolute;
+      width: 95px;
+      height: 95px;
+      z-index: -1;
+      border-radius: 50%;
+      background: #627cff;
+      filter: blur(35px);
+      opacity: 0.65;
+    }
+
+    .study-icon {
+      position: relative;
+      z-index: 2;
+      font-size: 68px;
+      filter: drop-shadow(0 0 15px rgba(111, 146, 255, 0.7));
+      animation: studyFloat 3s ease-in-out infinite;
+    }
+
+    .orbit {
+      position: absolute;
+      width: 165px;
+      height: 65px;
+      border: 1px solid rgba(130, 157, 255, 0.65);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .orbit-one {
+      transform: rotate(-35deg);
+    }
+
+    .orbit-two {
+      width: 185px;
+      height: 85px;
+      transform: rotate(40deg);
+      border-color: rgba(95, 218, 255, 0.4);
+    }
+
+    .orbit-three {
+      width: 145px;
+      height: 180px;
+      transform: rotate(28deg);
+      border-color: rgba(130, 157, 255, 0.22);
+    }
+
+    .orb-star {
+      position: absolute;
+      z-index: 3;
+      color: #a8dfff;
+      text-shadow: 0 0 12px #6b9bff;
+    }
+
+    .star-one {
+      top: 32px;
+      right: 42px;
+      font-size: 22px;
+    }
+
+    .star-two {
+      bottom: 37px;
+      left: 35px;
+      font-size: 25px;
+    }
+
+    .star-three {
+      top: 55px;
+      left: 32px;
+      font-size: 13px;
+    }
+
+    .orb-dot {
+      position: absolute;
+      right: 25px;
+      bottom: 58px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #65dfff;
+      box-shadow: 0 0 15px #65dfff;
+    }
+
+    @keyframes studyFloat {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .welcome {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .orb {
+        width: 150px;
+        height: 150px;
+        align-self: center;
+        margin: 10px auto 0;
+      }
+
+      .study-icon {
+        font-size: 52px;
+      }
+
+      .orbit-one {
+        width: 125px;
+        height: 50px;
+      }
+
+      .orbit-two {
+        width: 135px;
+        height: 65px;
+      }
+
+      .orbit-three {
+        width: 105px;
+        height: 125px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .study-icon {
+        animation: none;
+      }
+    }
+  </style>
+
+  <script src="script.js"></script>
+</body>
+</html>
+```
